@@ -3,17 +3,22 @@ import questions from "./questions";
 import Result from "./Result";
 
 export default function QuestionBox() {
+
+  // Declaring States
   const [score, setScore] = useState(0);
   const [highlighted, setHighlighted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizComplete, setQuizComplete] = useState(false);
 
+  // Checking Correct answers from questions array and by using dot notation of objection checking whether user clicked option is correct or not
+  // and if correct updating score.
   const updateScore = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1);
     }
   };
 
+  // Creating PlayAgain function for Play Again button to redirect user to quiz component.
   const playAgain = () => {
     setScore(0);
     setHighlighted(false);
@@ -21,14 +26,18 @@ export default function QuestionBox() {
     setQuizComplete(false);
   };
 
+  // function to update highlight of question where use State has been used.
   const handleHighlight = () => {
     setHighlighted(true);
   };
 
+  //function to update removeHighlight of question where use State has been used
   const handleRemoveHighlight = () => {
     setHighlighted(false);
   };
 
+    // Function to  handling option clicked , calling to update score function, moving to next question after clicking the appeared options.
+    // and updating quizComplete state.
   const handleOptionClick = (isCorrect) => {
     updateScore(isCorrect);
     if (currentQuestion + 1 < questions.length) {
@@ -39,6 +48,7 @@ export default function QuestionBox() {
     setHighlighted(false);
   };
 
+  // Functions to extract options from questions array and by using map functions of it. Filling the options in respective created Divs.
   const renderOptions = () => {
     const currentOptions = questions[currentQuestion].options;
     return currentOptions.map((option, index) => (
@@ -52,6 +62,7 @@ export default function QuestionBox() {
     ));
   };
 
+  // Object for handling highlight function.
   const questionStyle = {
     color: highlighted ? "red" : "green",
     padding: "10px",
@@ -59,7 +70,8 @@ export default function QuestionBox() {
     fontSize: "30px",
     margin: "10px",
   };
-
+  
+  // return function of quiz component and passing props to result component if quizComplete state becomes true.
   return (
     <div className="playground">
       {!quizComplete ? (
@@ -79,7 +91,7 @@ export default function QuestionBox() {
             </button>
           </div>
         </>
-      ) : (
+      )  : (
         <Result
           count={score}
           totalQuestions={questions.length}

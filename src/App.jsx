@@ -3,10 +3,14 @@ import "./App.css";
 import QuestionBox from "./components/quizComponent";
 
 export default function App() {
+
+  // Declaring States
   const [page, clickPage] = useState(0);
   const [lightTheme, setLightTheme] = useState("Light");
   const [toggleButton, setColor] = useState(true);
 
+
+  // Creating Objects for toggle button 
   const theme = {
     darkTheme: {
       backgroundColor: "black",
@@ -20,14 +24,18 @@ export default function App() {
     },
   };
 
+  //  handlingClick function and if user click on play quiz  , it will direct to playground page.
   const handleClick = () => {
     clickPage(1);
   };
+
+  // background color of toggle button and maintaining background color of body.
   const handleBackgroundText = () => {
     setLightTheme((prevTheme) => !prevTheme);
     setColor(!toggleButton);
   };
-
+  
+  // Start page function 
   function StartPage() {
     return (
       <div className="centreAdjust">
@@ -41,6 +49,7 @@ export default function App() {
     );
   }
 
+  //  return of App components 
   return (
     <div
       className="backGround"
@@ -55,7 +64,8 @@ export default function App() {
           {toggleButton ? "dark" : "light"}
         </button>
       </div>
-
+     
+     {/* Checking conditions whether to navigating to question box component or stay on start page components */}
       <section className="sizeAdjust">
         {page === 0 ? StartPage() : <QuestionBox />}
       </section>

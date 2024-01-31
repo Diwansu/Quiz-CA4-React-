@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Result(props) {
+  // simple arithmetic formula to convert into percentage and toFixed for maintaining  float value like (40.00%)
   const percentage = ((props.count / props.totalQuestions) * 100).toFixed(2);
 
   return (
